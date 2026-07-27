@@ -1,0 +1,63 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="footer-logo" href="{{ '/' | relative_url }}">
+        <i class="fas fa-bicycle"></i> {{ site.title }}
+      </a>
+      <p>Discover Madrid on two wheels. Guided bike tours through parks, landmarks, and hidden gems of Spain's capital.</p>
+      <div class="footer-social">
+        {% if site.social.instagram %}
+        <a href="https://instagram.com/{{ site.social.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        {% endif %}
+        {% if site.social.facebook %}
+        <a href="https://facebook.com/{{ site.social.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        {% endif %}
+        {% if site.social.twitter %}
+        <a href="https://twitter.com/{{ site.social.twitter }}" target="_blank" rel="noopener" aria-label="Twitter / X">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <h4>Tours</h4>
+      <ul>
+        <li><a href="{{ '/tours/' | relative_url }}">All Tours</a></li>
+        {% for tour in site.tours limit:4 %}
+        <li><a href="{{ tour.url | relative_url }}">{{ tour.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="footer-links">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="{{ '/about/' | relative_url }}">About Us</a></li>
+        <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+        <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+        <li><a href="{{ '/faq/' | relative_url }}">FAQ</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <ul>
+        <li><i class="fas fa-map-marker-alt"></i> Madrid, Spain</li>
+        <li><i class="fas fa-envelope"></i> <a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
+        <li><i class="fas fa-phone"></i> +34 600 000 000</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; {{ "now" | date: "%Y" }} {{ site.title }}. All rights reserved.</p>
+      <p>Made with <i class="fas fa-heart" style="color:#e74c3c"></i> in Madrid</p>
+    </div>
+  </div>
+</footer>

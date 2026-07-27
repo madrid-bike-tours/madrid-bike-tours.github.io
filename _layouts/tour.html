@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<article class="tour-detail">
+  <header class="tour-hero" {% if page.image %}style="background-image: url('{% if page.image contains '://' %}{{ page.image }}{% else %}{{ page.image | relative_url }}{% endif %}')"{% endif %}>
+    <div class="tour-hero-overlay">
+      <div class="container">
+        <span class="tour-badge">{{ page.duration }}</span>
+        <h1>{{ page.title }}</h1>
+        {% if page.tagline %}<p class="tour-tagline">{{ page.tagline }}</p>{% endif %}
+        <div class="tour-quick-facts">
+          <span><i class="fas fa-clock"></i> {{ page.duration }}</span>
+          <span><i class="fas fa-route"></i> {{ page.distance }}</span>
+          <span><i class="fas fa-signal"></i> {{ page.difficulty }}</span>
+          <span><i class="fas fa-euro-sign"></i> {{ page.price }}</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tour-content-grid">
+      <div class="tour-main">
+        {{ content }}
+      </div>
+      <aside class="tour-sidebar">
+        <div class="booking-card">
+          <div class="booking-price">
+            <span class="price-amount">€{{ page.price }}</span>
+            <span class="price-per">per person</span>
+          </div>
+          <ul class="booking-details">
+            <li><i class="fas fa-clock"></i> <strong>Duration:</strong> {{ page.duration }}</li>
+            <li><i class="fas fa-route"></i> <strong>Distance:</strong> {{ page.distance }}</li>
+            <li><i class="fas fa-signal"></i> <strong>Difficulty:</strong> {{ page.difficulty }}</li>
+            <li><i class="fas fa-users"></i> <strong>Group size:</strong> {{ page.group_size | default: "Max 12" }}</li>
+            <li><i class="fas fa-language"></i> <strong>Language:</strong> {{ page.language | default: "English, Spanish" }}</li>
+          </ul>
+          {% if page.includes %}
+          <div class="tour-includes">
+            <h4>Includes</h4>
+            <ul>
+              {% for item in page.includes %}
+              <li><i class="fas fa-check"></i> {{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          <a href="/contact/?tour={{ page.title | uri_escape }}" class="btn btn-primary btn-block">Book This Tour</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</article>

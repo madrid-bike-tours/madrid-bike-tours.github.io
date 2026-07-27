@@ -1,0 +1,35 @@
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a class="site-logo" href="{{ '/' | relative_url }}">
+      <i class="fas fa-bicycle"></i>
+      <span>{{ site.title }}</span>
+    </a>
+
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="site-nav">
+      {% for link in site.nav_links %}
+      <a href="{{ link.url | relative_url }}"
+         class="nav-link {% if page.url == link.url or page.url contains link.url and link.url != '/' %}active{% endif %}">
+        {{ link.title }}
+      </a>
+      {% endfor %}
+      <a href="{{ '/contact/' | relative_url }}" class="btn btn-primary btn-sm">Book a Tour</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  const header = document.getElementById('site-header');
+  toggle.addEventListener('click', () => {
+    nav.classList.toggle('is-open');
+    toggle.classList.toggle('is-open');
+  });
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>

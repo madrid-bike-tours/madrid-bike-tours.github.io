@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-hero" {% if page.image %}style="background-image: url('{% if page.image contains '://' %}{{ page.image }}{% else %}{{ page.image | relative_url }}{% endif %}')"{% endif %}>
+    <div class="post-hero-overlay">
+      <div class="container">
+        <div class="post-meta">
+          <span class="post-category">{{ page.categories | first | default: "Blog" }}</span>
+          <span class="post-date">
+            <i class="fas fa-calendar-alt"></i>
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+          </span>
+          <span class="post-read-time">
+            <i class="fas fa-clock"></i>
+            {% assign words = content | number_of_words %}
+            {% if words < 360 %}1 min{% else %}{{ words | divided_by: 180 }} min{% endif %} read
+          </span>
+        </div>
+        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+        {% if page.excerpt %}<p class="post-subtitle">{{ page.excerpt | strip_html }}</p>{% endif %}
+        <div class="post-author">
+          <i class="fas fa-user-circle"></i>
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span itemprop="name">{{ page.author | default: site.author.name }}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="post-wrapper">
+    <div class="container">
+      <div class="post-content" itemprop="articleBody">
+        {{ content }}
+      </div>
+
+      <footer class="post-footer">
+        {% if page.tags.size > 0 %}
+        <div class="post-tags">
+          <i class="fas fa-tags"></i>
+          {% for tag in page.tags %}
+          <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="post-share">
+          <span>Share this post:</span>
+          <a href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener" class="share-btn share-twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | uri_escape }}" target="_blank" rel="noopener" class="share-btn share-facebook">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </div>
+      </footer>
+
+      {% include post-navigation.html %}
+    </div>
+  </div>
+</article>

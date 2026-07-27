@@ -1,0 +1,84 @@
+title: Madrid Bike Tours
+description: >-
+  Discover Madrid on two wheels. Guided bike tours through the heart of Spain's
+  vibrant capital — parks, historic landmarks, hidden neighborhoods, and more.
+baseurl: ""
+url: "https://madrid-bike-tours.github.io/"
+author:
+  name: Madrid Bike Tours
+  email: valery.tibo@gmail.com
+
+# Build settings
+theme: null
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Sass
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# Collections
+collections:
+  tours:
+    output: true
+    permalink: /tours/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Madrid Bike Tours"
+  - scope:
+      path: ""
+      type: "tours"
+    values:
+      layout: "tour"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Pagination
+paginate: 6
+paginate_path: "/blog/page:num/"
+
+# Permalinks
+permalink: /blog/:year/:month/:day/:title/
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .gitignore
+  - README.md
+
+# Navigation
+nav_links:
+  - title: Home
+    url: /
+  - title: Tours
+    url: /tours/
+  - title: Blog
+    url: /blog/
+  - title: About
+    url: /about/
+  - title: Contact
+    url: /contact/
+
+# Social
+social:
+  instagram: madridbketours
+  facebook: madridbketours
+  twitter: madridbketours
+
+# Google Analytics (optional)
+# google_analytics: UA-XXXXXXXX-X

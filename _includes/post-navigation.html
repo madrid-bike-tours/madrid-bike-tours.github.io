@@ -1,0 +1,29 @@
+{% assign prev = nil %}
+{% assign next = nil %}
+{% for post in site.posts %}
+  {% if post.url == page.url %}
+    {% assign found = true %}
+  {% elsif found == nil %}
+    {% assign next = post %}
+  {% else %}
+    {% assign prev = post %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if prev or next %}
+<nav class="post-navigation">
+  {% if prev %}
+  <a class="post-nav-link post-nav-prev" href="{{ prev.url | relative_url }}">
+    <span class="nav-direction"><i class="fas fa-arrow-left"></i> Previous</span>
+    <span class="nav-title">{{ prev.title }}</span>
+  </a>
+  {% endif %}
+  {% if next %}
+  <a class="post-nav-link post-nav-next" href="{{ next.url | relative_url }}">
+    <span class="nav-direction">Next <i class="fas fa-arrow-right"></i></span>
+    <span class="nav-title">{{ next.title }}</span>
+  </a>
+  {% endif %}
+</nav>
+{% endif %}

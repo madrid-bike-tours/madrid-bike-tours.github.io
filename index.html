@@ -1,0 +1,167 @@
+---
+layout: default
+title: Madrid Bike Tours — Explore the City on Two Wheels
+---
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="container hero-content">
+    <span class="hero-badge"><i class="fas fa-star"></i> #1 Rated Bike Tour in Madrid</span>
+    <h1 class="hero-title">Discover Madrid<br><span>on Two Wheels</span></h1>
+    <p class="hero-subtitle">Guided bike tours through Madrid's iconic parks, royal palaces, vibrant neighborhoods, and hidden gems you won't find in any guidebook.</p>
+    <div class="hero-actions">
+      <a href="{{ '/tours/' | relative_url }}" class="btn btn-primary btn-lg">Explore Our Tours</a>
+      <a href="{{ '/about/' | relative_url }}" class="btn btn-outline btn-lg">Learn More</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>500+</strong><span>Tours completed</span></div>
+      <div class="stat"><strong>4.9★</strong><span>Average rating</span></div>
+      <div class="stat"><strong>1200+</strong><span>Happy cyclists</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section features-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Why Cycle Madrid With Us?</h2>
+      <p>We are local experts passionate about sharing Madrid's best kept secrets from the saddle of a bike.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+        <h3>Expert Local Guides</h3>
+        <p>Born and raised in Madrid, our guides know every cobblestone and shortcut in the city.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-bicycle"></i></div>
+        <h3>Quality Bikes</h3>
+        <p>Comfortable hybrid bikes for all fitness levels, plus e-bikes available on request.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-users"></i></div>
+        <h3>Small Groups</h3>
+        <p>Maximum 12 people per tour so you get a personal and immersive experience.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Safe &amp; Insured</h3>
+        <p>All tours include helmets and full liability insurance. Safety is our top priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Tours Section -->
+<section class="section tours-section bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Our Popular Tours</h2>
+      <p>From royal palaces to vibrant street art — there's a Madrid bike adventure for everyone.</p>
+    </div>
+    <div class="tours-grid">
+      {% for tour in site.tours limit:3 %}
+      <div class="tour-card">
+        {% if tour.image %}
+        <div class="tour-card-image" style="background-image: url('{{ tour.image | relative_url }}')">
+        {% else %}
+        <div class="tour-card-image tour-card-image--placeholder">
+        {% endif %}
+          <span class="tour-difficulty tour-difficulty--{{ tour.difficulty | downcase }}">{{ tour.difficulty }}</span>
+        </div>
+        <div class="tour-card-body">
+          <h3><a href="{{ tour.url | relative_url }}">{{ tour.title }}</a></h3>
+          <p>{{ tour.excerpt | strip_html | truncate: 100 }}</p>
+          <div class="tour-card-meta">
+            <span><i class="fas fa-clock"></i> {{ tour.duration }}</span>
+            <span><i class="fas fa-route"></i> {{ tour.distance }}</span>
+            <span class="tour-price">€{{ tour.price }}</span>
+          </div>
+          <a href="{{ tour.url | relative_url }}" class="btn btn-secondary btn-sm">View Tour</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="section-footer">
+      <a href="{{ '/tours/' | relative_url }}" class="btn btn-primary">View All Tours</a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section testimonials-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>What Our Cyclists Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Absolutely the best way to see Madrid! Our guide Carlos knew every hidden corner. We found restaurants and plazas we never would have found on our own."</p>
+        <div class="testimonial-author">
+          <strong>Sarah M.</strong> <span>— London, UK</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"We did the Retiro Park morning tour and it was magical. Peaceful, beautiful, and the commentary about the park's history was fascinating."</p>
+        <div class="testimonial-author">
+          <strong>Pierre D.</strong> <span>— Paris, France</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Perfect for families! Our kids (ages 10 and 13) absolutely loved it. The bikes were well-maintained and the pace was just right."</p>
+        <div class="testimonial-author">
+          <strong>The Johnson Family</strong> <span>— New York, USA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Preview Section -->
+<section class="section blog-preview-section bg-light">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest from the Blog</h2>
+      <p>Tips, routes, and stories about cycling in Madrid.</p>
+    </div>
+    <div class="blog-preview-grid">
+      {% for post in site.posts limit:3 %}
+      <article class="blog-card">
+        {% if post.image %}
+        <a href="{{ post.url | relative_url }}" class="blog-card-image" style="background-image: url('{% if post.image contains '://' %}{{ post.image }}{% else %}{{ post.image | relative_url }}{% endif %}')"></a>
+        {% else %}
+        <a href="{{ post.url | relative_url }}" class="blog-card-image blog-card-image--placeholder"></a>
+        {% endif %}
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <span class="blog-category">{{ post.categories | first | default: "Blog" }}</span>
+            <time>{{ post.date | date: "%b %d, %Y" }}</time>
+          </div>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+          <a href="{{ post.url | relative_url }}" class="read-more">Read more <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="section-footer">
+      <a href="{{ '/blog/' | relative_url }}" class="btn btn-primary">Visit Our Blog</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container cta-content">
+    <h2>Ready to Pedal Through Madrid?</h2>
+    <p>Book your bike tour today and create memories that last a lifetime.</p>
+    <a href="{{ '/contact/' | relative_url }}" class="btn btn-white btn-lg">Book Your Tour</a>
+  </div>
+</section>

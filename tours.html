@@ -1,0 +1,55 @@
+---
+layout: page
+title: Our Tours
+permalink: /tours/
+---
+
+<section class="tours-index">
+  <div class="tours-intro">
+    <p>Whether you're a first-time visitor or a Madrid regular, our guided bike tours offer an unforgettable way to explore the city. All tours depart from central Madrid — bikes and helmets included.</p>
+  </div>
+
+  <div class="tours-filter">
+    <button class="filter-btn active" data-filter="all">All Tours</button>
+    <button class="filter-btn" data-filter="easy">Easy</button>
+    <button class="filter-btn" data-filter="moderate">Moderate</button>
+    <button class="filter-btn" data-filter="challenging">Challenging</button>
+  </div>
+
+  <div class="tours-grid tours-grid--full">
+    {% for tour in site.tours %}
+    <div class="tour-card" data-difficulty="{{ tour.difficulty | downcase }}">
+      {% if tour.image %}
+      <div class="tour-card-image" style="background-image: url('{% if tour.image contains '://' %}{{ tour.image }}{% else %}{{ tour.image | relative_url }}{% endif %}')">
+      {% else %}
+      <div class="tour-card-image tour-card-image--placeholder">
+      {% endif %}
+        <span class="tour-difficulty tour-difficulty--{{ tour.difficulty | downcase }}">{{ tour.difficulty }}</span>
+      </div>
+      <div class="tour-card-body">
+        <h3><a href="{{ tour.url | relative_url }}">{{ tour.title }}</a></h3>
+        <p>{{ tour.excerpt | strip_html | truncate: 120 }}</p>
+        <div class="tour-card-meta">
+          <span><i class="fas fa-clock"></i> {{ tour.duration }}</span>
+          <span><i class="fas fa-route"></i> {{ tour.distance }}</span>
+          <span class="tour-price">€{{ tour.price }}</span>
+        </div>
+        <a href="{{ tour.url | relative_url }}" class="btn btn-secondary btn-sm">View Tour</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.tour-card').forEach(card => {
+      card.style.display = (filter === 'all' || card.dataset.difficulty === filter) ? '' : 'none';
+    });
+  });
+});
+</script>
